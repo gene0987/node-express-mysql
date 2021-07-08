@@ -13,8 +13,9 @@ const checkConnection = () => {
   }
 };
 
-// with promise
-const getAll = (req, res) => {
+// SERVICE LAYER
+// with promise and async
+const getAll = async (req, res) => {
   return new Promise((resolve, reject) => {
     const query = `SELECT * FROM person`;
 
@@ -30,10 +31,10 @@ const getAll = (req, res) => {
 };
 
 // no promise
-// const getAll = () => {
+// const getAll = async () => {
 //   const query = `SELECT * FROM person`;
 
-//   dbConn.query(query, function (err, results) {
+//   dbConn.query(query,  (err, results) =>  {
 //     if (err) {
 //       console.log("error:", err);
 //     }
@@ -51,7 +52,7 @@ const insertDummy = () => {
   });
 };
 
-const getById = (req, res) => {
+const getById = async (req, res) => {
   return new Promise((resolve, reject) => {
     const query = "SELECT * FROM person where id = ?";
 
@@ -62,7 +63,7 @@ const getById = (req, res) => {
   });
 };
 
-const update = (req, res) => {
+const update = async (req, res) => {
   return new Promise((resolve, reject) => {
     const query =
       "UPDATE node_db.person SET name= ?, age= ?, dob= ? WHERE id= ?;";
@@ -78,7 +79,7 @@ const update = (req, res) => {
   });
 };
 
-const deleteById = (req, res) => {
+const deleteById = async (req, res) => {
   return new Promise((resolve, reject) => {
     const query = "DELETE FROM node_db WHERE id= ?;";
 
@@ -89,10 +90,10 @@ const deleteById = (req, res) => {
   });
 };
 
-const create = (req, res) => {
+const create = async (req, res) => {
   return new Promise((resolve, reject) => {
     const query = "INSERT INTO node_db.person(name, age, dob)VALUES(?, ?, ?);";
-    
+
     const rawJson = JSON.stringify(req.body);
     const parsedJson = JSON.parse(rawJson);
     const p = new Person(parsedJson);

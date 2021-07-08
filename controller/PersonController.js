@@ -34,6 +34,7 @@ const personService = require("../service/PersonService");
 //     });
 // };
 
+// CONTROLLER
 // async/await
 const getAll = async (req, res) => {
   try {
@@ -81,7 +82,7 @@ const update = async (req, res) => {
 
 const deleteById = async (req, res) => {
   try {
-    const result = personService.delete(req, res);
+    const result = await personService.delete(req, res);
 
     res.status(200);
     res.send(result);
