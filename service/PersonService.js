@@ -1,6 +1,5 @@
 const dbConn = require("../resource/connection");
 const Person = require("../model/Person");
-const { raw } = require("express");
 
 const checkConnection = () => {
   console.log("checking connection");
