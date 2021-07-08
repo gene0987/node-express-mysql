@@ -30,16 +30,16 @@ const getAll = (req, res) => {
 
 // no promise
 // const getAll = () => {
-//     const query = `SELECT * FROM person`;
+//   const query = `SELECT * FROM person`;
 
-//     dbConn.query(query, function (err, results) {
-//           if (err) {
-//               console.log("error:", err);
-//           }
-//           console.log('service layer', results )
-//           return results;
-//       });
-//   };
+//   dbConn.query(query, function (err, results) {
+//     if (err) {
+//       console.log("error:", err);
+//     }
+//     console.log("service layer", results);
+//     return results;
+//   });
+// };
 
 const insertDummy = () => {
   const query = "INSERT INTO node_db.person (name, age, dob) VALUES(?, ?, ?)";
