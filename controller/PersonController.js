@@ -27,7 +27,11 @@ const getAll = (req, res) => {
       console.log("controller layer: ", results);
       res.send(results);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err);
+      res.status(500);
+      res.send(err);
+    });
 };
 
 const getById = (req, res) => {
