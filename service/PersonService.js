@@ -12,17 +12,23 @@ const checkConnection = () => {
   }
 };
 
+// with promise
 const getAll = (req, res) => {
   return new Promise((resolve, reject) => {
     const query = `SELECT * FROM person`;
 
     dbConn.query(query, (err, results) => {
-      if (err) reject(err.message);
-      else resolve(results);
+      if (err) {
+        reject(err.message);
+      } else {
+        console.log("service layer:", results);
+        resolve(results);
+      }
     });
   });
 };
 
+// no promise
 // const getAll = () => {
 //     const query = `SELECT * FROM person`;
 

@@ -3,11 +3,24 @@ const personService = require("../service/PersonService");
 // try using await/async instead of promises
 // to tidy up the code
 
+// no promise
+// const getAll = (req, res) => {
+//   console.log("retrieving all data");
+//   const result = personService.getAll();
+//   console.log("controller layer: ", result);
+//   res.status(200);
+//   res.send(result);
+// };
+
+// with promise
 const getAll = (req, res) => {
   console.log("retrieving all data");
   personService
     .getAll(req, res)
-    .then((results) => res.send(results))
+    .then((results) => {
+      console.log("controller layer: ", results);
+      res.send(results);
+    })
     .catch((err) => console.log(err));
 };
 
