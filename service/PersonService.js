@@ -66,6 +66,7 @@ const update = (req, res) => {
   return new Promise((resolve, reject) => {
     const query =
       "UPDATE node_db.person SET name= ?, age= ?, dob= ? WHERE id= ?;";
+
     const rawJson = JSON.stringify(req.body);
     const parsedJson = JSON.parse(rawJson);
     const p = new Person(parsedJson);
@@ -91,6 +92,7 @@ const deleteById = (req, res) => {
 const create = (req, res) => {
   return new Promise((resolve, reject) => {
     const query = "INSERT INTO node_db.person(name, age, dob)VALUES(?, ?, ?);";
+    
     const rawJson = JSON.stringify(req.body);
     const parsedJson = JSON.parse(rawJson);
     const p = new Person(parsedJson);
