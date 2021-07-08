@@ -1,6 +1,7 @@
 const personService = require("../service/PersonService");
 
-// try using await/async isntead of promises
+// try using await/async instead of promises
+// to tidy up the code
 
 const getAll = (req, res) => {
   console.log("retrieving all data");
@@ -13,29 +14,57 @@ const getAll = (req, res) => {
 const getById = (req, res) => {
   personService
     .getById(req, res)
-    .then((results) => res.send(results))
-    .catch((err) => console.log(err));
+    .then((results) => {
+      res.status(200);
+      res.send(results);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500);
+      res.send(err);
+    });
 };
 
 const update = (req, res) => {
   personService
     .update(req, res)
-    .then((results) => res.send(results))
-    .catch((err) => console.log(err));
+    .then((results) => {
+      res.status(200);
+      res.send(results);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500);
+      res.send(err);
+    });
 };
 
 const deleteById = (req, res) => {
   personService
     .delete(req, res)
-    .then((results) => res.send(results))
-    .catch((err) => console.log(err));
+    .then((results) => {
+      res.status(200);
+      res.send(results);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500);
+      res.send(err);
+    });
 };
 
 const create = (req, res) => {
   personService
     .create(req, res)
-    .then((results) => res.send(results))
-    .catch((err) => console.log(err));
+    .then((results) => {
+      res.status(200);
+      res.send(results);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500);
+      res.send(err);
+    });
 };
 
 const insertDummy = (req, res) => {

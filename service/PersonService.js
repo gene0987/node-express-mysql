@@ -4,11 +4,8 @@ const checkConnection = () => {
   console.log("checking connection");
   try {
     dbConn.connect((err) => {
-      if (!err) {
-        console.log("connected to db...");
-      } else {
-        console.log(`Error : ${err}`);
-      }
+      if (!err) console.log("connected to db...");
+      else console.log(`Error : ${err}`);
     });
   } catch (error) {
     console.log(error);
@@ -20,10 +17,8 @@ const getAll = (req, res) => {
     const query = `SELECT * FROM person`;
 
     dbConn.query(query, (err, results) => {
-      if (err) {
-        reject(new Error(err.message));
-      }
-      resolve(results);
+      if (err) reject(err.message);
+      else resolve(results);
     });
   });
 };
@@ -41,27 +36,19 @@ const getAll = (req, res) => {
 //   };
 
 const insertDummy = () => {
-  dbConn.query(
-    "INSERT INTO node_db.person (name, age, dob) VALUES(?, ?, ?)",
-    ["Doma", "23", "1-20-9999"],
-    (error, results, fields) => {
-      if (error) {
-        console.log("error:", error);
-      }
-
-      console.log("inserted dummy data");
-    }
-  );
+  const query = "INSERT INTO node_db.person (name, age, dob) VALUES(?, ?, ?)";
+  dbConn.query(query, ["Doma", "23", "1-20-9999"], (error, results, fields) => {
+    if (error) console.log("error:", error);
+    else console.log("inserted dummy data");
+  });
 };
 
 const getById = (req, res) => {
   return new Promise((resolve, reject) => {
     const query = "SELECT * FROM person where id = ?";
     dbConn.query(query, req.params.id, (err, results) => {
-      if (err) {
-        reject(new Error(err.message));
-      }
-      resolve(results);
+      if (err) reject(err.message);
+      else resolve(results);
     });
   });
 };
@@ -74,10 +61,8 @@ const update = (req, res) => {
       query,
       [req.body.name, req.body.age, req.body.dob, req.body.id],
       (err, results) => {
-        if (err) {
-          reject(new Error(err.message));
-        }
-        resolve(results);
+        if (err) reject(err.message);
+        else resolve(results);
       }
     );
   });
@@ -87,10 +72,8 @@ const deleteById = (req, res) => {
   return new Promise((resolve, reject) => {
     const query = "DELETE FROM node_db WHERE id= ?;";
     dbConn.query(query, req.param.id, (err, results) => {
-      if (err) {
-        reject(new Error(err.message));
-      }
-      resolve(results);
+      if (err) reject(err.message);
+      else resolve(results);
     });
   });
 };
@@ -102,10 +85,8 @@ const create = (req, res) => {
       query,
       [req.body.name, req.body.age, req.body.dob],
       (err, results) => {
-        if (err) {
-          reject(new Error(err.message));
-        }
-        resolve(results);
+        if (err) reject(err.message);
+        else resolve(results);
       }
     );
   });
@@ -120,4 +101,3 @@ module.exports = {
   deleteById,
   create,
 };
-// getById, getAll, update, deleteById, create, insertDummy
