@@ -1,5 +1,7 @@
 const personService = require("../service/PersonService");
 
+// try using await/async isntead of promises
+
 const getAll = (req, res) => {
   console.log("retrieving all data");
   personService
