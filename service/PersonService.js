@@ -1,4 +1,6 @@
 const dbConn = require("../resource/connection");
+const Person = require("../model/Person");
+const { raw } = require("express");
 
 const checkConnection = () => {
   console.log("checking connection");
@@ -65,15 +67,14 @@ const update = (req, res) => {
   return new Promise((resolve, reject) => {
     const query =
       "UPDATE node_db.person SET name= ?, age= ?, dob= ? WHERE id= ?;";
+    const rawJson = JSON.stringify(req.body);
+    const parsedJson = JSON.parse(rawJson);
+    const p = new Person(parsedJson);
 
-    dbConn.query(
-      query,
-      [req.body.name, req.body.age, req.body.dob, req.body.id],
-      (err, results) => {
-        if (err) reject(err.message);
-        else resolve(results);
-      }
-    );
+    dbConn.query(query, [p.name, p.age, p.dob, p.id], (err, results) => {
+      if (err) reject(err.message);
+      else resolve(results);
+    });
   });
 };
 
@@ -91,15 +92,14 @@ const deleteById = (req, res) => {
 const create = (req, res) => {
   return new Promise((resolve, reject) => {
     const query = "INSERT INTO node_db.person(name, age, dob)VALUES(?, ?, ?);";
+    const rawJson = JSON.stringify(req.body);
+    const parsedJson = JSON.parse(rawJson);
+    const p = new Person(parsedJson);
 
-    dbConn.query(
-      query,
-      [req.body.name, req.body.age, req.body.dob],
-      (err, results) => {
-        if (err) reject(err.message);
-        else resolve(results);
-      }
-    );
+    dbConn.query(query, [p.name, p.age, p.dob], (err, results) => {
+      if (err) reject(err.message);
+      else resolve(results);
+    });
   });
 };
 
